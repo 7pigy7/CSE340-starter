@@ -6,10 +6,6 @@
   box-sizing: border-box;
 }
 
-html {
-  background-image: url("/public/images/site/checkerboard.jpg");
-}
-
 body {
     font-family: 'Ubuntu Mono', monospace;
 }
