@@ -10,6 +10,10 @@ body {
     font-family: 'Ubuntu Mono', monospace;
 }
 
+span.siteName {
+  font-size: 3em;
+}
+
 header {
     display: flex;
     justify-content: space-between;
