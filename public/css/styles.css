@@ -102,13 +102,13 @@ footer {
 
 @media only screen and (min-width: 32.5em) {
     HTML {
-        background-image: url("/public/images/site/checkerboard.jpg");
+        background-image: url("/images/site/checkerboard.jpg");
         background-repeat: repeat;
     }
 
     body {
         background-color: white;
-        margin: auto 15%;
+        margin: 3% 15%;
         border: .25em solid #4c96d7;
         border-radius: 10px;
     }
