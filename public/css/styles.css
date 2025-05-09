@@ -50,7 +50,7 @@ main {
 
 img {max-width: 100%;}
 
-div.contaiiner {
+div.container {
   position: relative;
 }
 
@@ -61,7 +61,7 @@ img.car {
 
 section {
     color: #4c96d7;
-    width: auto;
+    width: 10rem;
     position: absolute;
     top: 10px;
     left: 10px;
@@ -106,8 +106,8 @@ footer {
 }
 
 @media only screen and (min-width: 32.5em) {
-    HTML {
-        background-image: url("./images/site/checkerboard.jpg");
+    html {
+        background-image: url("../images/site/checkerboard.jpg");
         background-repeat: repeat;
     }
 
