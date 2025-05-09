@@ -50,6 +50,10 @@ main {
 
 img {max-width: 100%;}
 
+div.contaiiner {
+  position: relative;
+}
+
 img.car {
     display: flex;
     justify-content: center;
@@ -57,9 +61,10 @@ img.car {
 
 section {
     color: #4c96d7;
+    width: auto;
     position: absolute;
-    bottom: 3px;
-    left: 5px;
+    top: 10px;
+    left: 10px;
     background-color: rgba(255, 255, 255, 0.9);
 }
 
