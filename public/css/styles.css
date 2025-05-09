@@ -57,9 +57,9 @@ img.car {
 
 section {
     color: #4c96d7;
-    position: relative;
-    top: 1rem;
-    left: 3rem;
+    position: absolute;
+    bottom: 3px;
+    left: 5px;
     background-color: rgba(255, 255, 255, 0.9);
 }
 
