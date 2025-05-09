@@ -4,3 +4,133 @@
 *:after {
   box-sizing: border-box;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+body {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header div {padding-right: 2%;}
+
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1%;
+    background-color: #3a3a3a;
+    color: white;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: .5rem;
+    text-decoration: none;
+}
+
+.active {
+    background-color: #4c96d7;
+    color: black;
+}
+
+main {
+    padding: 1%;
+    border-bottom: .25rem solid black;
+}
+
+img {max-width: 100%;}
+
+img.car {
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    color: #4c96d7;
+    position: absolute;
+    top: 14rem;
+    left: 3rem;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+div.littleGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+div.item {
+    display: flex;
+    flex-direction: column;
+    max-width: 10rem;
+    justify-content: center;
+    justify-self: center;
+    text-align: center;
+}
+
+div.item img {
+    display: grid;
+    background-color: #4c96d7;
+    max-width: 10rem;
+    align-self: center;
+    justify-self: center;
+}
+
+div.background {
+    width: 10rem;
+    height: 6rem;
+    background-color: #4c96d7;
+    border: 1px solid #3a3a3a;
+    display: grid;
+    align-self: center;
+}
+
+footer {
+    text-align: center;
+}
+
+@media only screen and (min-width: 32.5em) {
+    HTML {
+        background-image: url("/phpmotors/images/site/checkerboard.jpg");
+    }
+
+    body {
+        background-color: white;
+        border: .25em solid #4c96d7;
+        border-radius: 10px;
+    }
+
+    img.fake {
+        position: absolute;
+        top: 24rem;
+        left: 3rem;
+        max-width: 9rem;
+    }
+
+    div.bigGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    div.upgrades {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    div.reviews {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}
