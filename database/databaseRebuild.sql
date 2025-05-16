@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS public.account
 
 --Data for table 'classification'
 INSERT INTO public.classification (classification_name)
-VALUES ('custom'),
+VALUES ('Custom'),
 ('Sport'),
 ('SUV'),
 ('Truck'),
@@ -236,3 +236,24 @@ VALUES   (
     'White',
     5
   );
+
+
+UPDATE inventory 
+SET 
+    inv_description = REPLACE(inv_description,
+        'small interiors',
+        'a huge interior')
+WHERE
+    inv_id = 10;
+
+UPDATE inventory 
+SET 
+    inv_image = REPLACE(inv_image,
+        '/images',
+        '/images/vehicles');
+
+UPDATE inventory 
+SET 
+    inv_thumbnail = REPLACE(inv_thumbnail,
+        '/images',
+        '/images/vehicles/');
