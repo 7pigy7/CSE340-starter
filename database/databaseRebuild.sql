@@ -256,4 +256,4 @@ UPDATE inventory
 SET 
     inv_thumbnail = REPLACE(inv_thumbnail,
         '/images',
-        '/images/vehicles/');
+        '/images/vehicles');
