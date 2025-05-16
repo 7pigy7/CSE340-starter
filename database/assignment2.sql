@@ -36,6 +36,7 @@ WHERE
     inventory.classification_id = 2;
     
 -- Query Six
+-- make sure they only run once otherwise there will be many /vehicles/ in a row
 UPDATE inventory 
 SET 
     inv_image = REPLACE(inv_image,
