@@ -31,7 +31,7 @@ nav ul {
     color: white;
 }
 
-nav ul li {
+ul li {
     list-style: none;
 }
 
@@ -105,6 +105,25 @@ div.background {
     align-self: center;
 }
 
+    .inv-display {
+        border:2px solid #4c96d7;
+        border-radius: 5px;
+        margin: 2.5%;
+        padding: 1.5%;
+        
+
+    }
+
+    #fullList {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    div.carPicture {
+        display: flex;
+        justify-content: center;
+    }
+
 footer {
     text-align: center;
 }
@@ -141,4 +160,15 @@ footer {
         grid-column: 2;
         grid-row: 1;
     }
+
+    #item-display {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    div.itemDetails {
+        padding: 2em;
+    }
+
+
 }

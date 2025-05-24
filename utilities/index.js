@@ -30,9 +30,9 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display">'
+    grid = '<ul id="fullList">'
     data.forEach(vehicle => { 
-      grid += '<li>'
+      grid += '<li class="inv-display">'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
@@ -61,9 +61,11 @@ Util.buildInventroyGrid = async function(data){
   let grid
   if(data.length = 1){
     grid = '<ul id="item-display">'
+    grid += '<div class="carPicture">'
     grid += '<img src="' + data.inv_image 
       +'" alt="Image of '+ data.inv_make + ' ' + data.inv_model 
       +' on CSE Motors" />'
+    grid += '</div>'
     grid += '<div class="itemDetails>"'
     grid += '<p>$' 
       + new Intl.NumberFormat('en-US').format(data.inv_price) + '</p>'
