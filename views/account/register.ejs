@@ -8,6 +8,14 @@
 <!--Message Block-->
 <%- messages() %>
 
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <!--Login Display-->
 <form action="/account/register" method="post">
     <fieldset>
@@ -19,6 +27,7 @@
         <input name="account_email" type="email" placeholder="sample@example.com" required>
         <label>Password:</label>
         <input name="account_password" type="text" minlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
         <div class="registerButton">
         <input type="submit" value="Register">
         </div>
