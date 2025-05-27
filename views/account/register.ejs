@@ -9,16 +9,16 @@
 <%- messages() %>
 
 <!--Login Display-->
-<form name="register" action="/account/register" method="post">
+<form action="/account/register" method="post">
     <fieldset>
         <label>Fisrt Name:</label>
-        <input type="text" required>
+        <input name="account_firstname" type="text" required>
         <label>Last Name:</label>
-        <input type="text" required>
+        <input name="account_lastname"  type="text" required>
         <label>Email:</label>
-        <input type="email" placeholder="sample@example.com" required>
+        <input name="account_email" type="email" placeholder="sample@example.com" required>
         <label>Password:</label>
-        <input type="text" minlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+        <input name="account_password" type="text" minlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
         <div class="registerButton">
         <input type="submit" value="Register">
         </div>
