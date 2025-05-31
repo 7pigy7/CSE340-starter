@@ -129,7 +129,7 @@ footer {
 }
 
 /* Style all input fields */
-input {
+input, textarea, select {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -141,7 +141,7 @@ input {
 
 /* Style the submit button */
 input[type=submit] {
-  background-color: #04AA6D;
+  background-color: #4c96d7;
   color: white;
 }
 

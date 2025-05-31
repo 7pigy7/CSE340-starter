@@ -24,6 +24,25 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
+Util.buildClassificationList = async function (classification_id = null) {
+    let data = await invModel.getClassifications()
+    let classificationList =
+      '<select name="classification_id" id="classificationList" required>'
+    classificationList += "<option value=''>Choose a Classification</option>"
+    data.rows.forEach((row) => {
+      classificationList += '<option value="' + row.classification_id + '"'
+      if (
+        classification_id != null &&
+        row.classification_id == classification_id
+      ) {
+        classificationList += " selected "
+      }
+      classificationList += ">" + row.classification_name + "</option>"
+    })
+    classificationList += "</select>"
+    return classificationList
+  }
+
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
@@ -80,6 +99,104 @@ Util.buildInventroyGrid = async function(data){
   }
   return grid
 }
+
+Util.buildLogin = async function(){
+  let grid
+ grid = '<form name="login" action="/account/login" method="post">'
+    grid += '<fieldset>'
+        grid += '<label>Email:</label>'
+        grid += '<input type="email" placeholder="sample@example.com" required>'
+        grid += '<label>Password:</label>'
+        grid += '<input type="password" required>'
+        grid += '<div class="loginButton">'
+        grid += '<input type="submit" value="Login">'
+        grid += '</div>'
+        grid += '<div class="createAccount">'
+            grid += '<a href="register">Sign-up Now</a>'
+        grid += '</div>'
+    grid += '</fieldset>'
+grid += '</form>'
+  return grid
+}
+
+Util.buildRegister = async function(){
+  let grid
+ grid = '<form action="/account/register" method="post">'
+    grid += '<fieldset>'
+     grid += '<label>Fisrt Name:</label>'
+        grid += '<input name="account_firstname" type="text" required value="<%= locals.account_firstname %>">'
+        grid += '<label>Last Name:</label>'
+        grid += '<input name="account_lastname"  type="text" required value="<%= locals.account_lastname %>">'
+        grid += '<label>Email:</label>'
+        grid += '<input name="account_email" type="email" placeholder="sample@example.com" required value="<%= locals.account_email %>">'
+        grid += '<label>Password:</label>'
+        grid += '<input name="account_password" type="text" minlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>'
+        grid += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>' 
+        grid += '<div class="registerButton">'
+        grid += '<input type="submit" value="Register">'
+        grid += '</div>'
+    grid += '</fieldset>'
+grid += '</form>'
+  return grid
+}
+
+Util.buildManagement = async function(){
+  let grid
+  grid = '<ul>'
+    grid += '<li><a href="/inv/add-classification">Add new classification</a></li>'
+    grid += '<li><a href="/inv/add-inventory">Add new inventory</a></li>'
+    grid += '</ul>'
+  return grid
+}
+
+Util.buildAddClassification = async function(){
+  let grid
+  grid = '<form name="add-classification" action="/inv/add-classification" method="post">'
+    grid += '<fieldset>'
+       grid += '<label>Classification Name</label>'
+        grid += '<input name="classification_name" type="text" pattern="[a-zA-Z]+" required>'
+        grid += '<span>Name must be alphabetic characters only</span>'
+       grid += '<div class="addButton">'
+        grid += '<input type="submit" value="Add Classification">'
+       grid += '</div>'
+    grid += '</fieldset>'
+grid += '</form>'
+  return grid
+}
+
+
+Util.buildNewItem = async function(classificationList){
+  let grid
+ grid = '<form action="/inv/add-inventory" method="post">'
+    grid += '<fieldset>'
+    grid += '<label>Classification:</label>'
+        grid += classificationList
+     grid += '<label>Make:</label>'
+        grid += '<input name="inv_make" type="text" required value="<%= locals.inv_make %>">'
+        grid += '<label>Model:</label>'
+        grid += '<input name="inv_model"  type="text" required value="<%= locals.inv_model %>">'
+        grid += '<label>Year:</label>'
+        grid += '<input name="inv_year" type="text" required value="<%= locals.inv_year %>">'
+        grid += '<label>Description:</label>'
+        grid += '<textarea name="inv_description" type="text"  required> </textarea>'
+       grid += '<label>Image:</label>'
+        grid += '<input name="inv_image" type="text" required value="/images/vechicles/no-image.png">'
+        grid += '<label>Thumbnail:</label>'
+        grid += '<input name="inv_thumbnail"  type="text" required value="/images/vechicles/no-image.png">'
+        grid += '<label>Price:</label>'
+        grid += '<input name="inv_price" type="text" required value="<%= locals.inv_price %>">'
+        grid += '<label>Miles:</label>'
+        grid += '<input name="inv_miles" type="text" required value="<%= locals.inv_miles %>">' 
+        grid += '<label>Color:</label>'
+        grid += '<input name="inv_color" type="text" required value="<%= locals.inv_color %>">' 
+        grid += '<div class="AddItemButton">'
+        grid += '<input type="submit" value="Add Item">'
+        grid += '</div>'
+    grid += '</fieldset>'
+grid += '</form>'
+  return grid
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors

@@ -91,7 +91,10 @@ validate.checkRegData = async (req, res, next) => {
       .withMessage("A valid email is required.")
       .custom(async (account_email) => {
     const emailExists = await accountModel.checkExistingEmail(account_email)
-    if (emailExists == false){
+    if (emailExists){
+      next()
+    }
+    else{
       throw new Error("Email does not exists. Please register or use a different email")
     }
   }),
@@ -110,9 +113,12 @@ validate.checkRegData = async (req, res, next) => {
         .withMessage("Password does not meet requirements.")
         .custom(async (account_email, account_password) => {
         const rightPassword = await accountModel.checkPassword(account_email, account_password)
-    if (rightPassword == false){
-      throw new Error("Password incorrect")
-    }})
+    if (rightPassword){
+      next()
+    }
+  else{
+    throw new Error("Password incorrect")
+  }})
     ]
   }
 

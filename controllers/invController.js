@@ -36,4 +36,87 @@ invCont.buildByInvetoryId = async function (req, res, next) {
   })
 }
 
+invCont.buildManagement = async function (req, res, next) {
+  const grid = await utilities.buildManagement()
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: 'Management View',
+    nav,
+    grid,
+  })
+}
+
+invCont.buildAddClassification = async function (req, res, next) {
+  const grid = await utilities.buildAddClassification()
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: 'Add Classification',
+    nav,
+    grid,
+  })
+}
+
+invCont.AddNewClassification = async function (req, res) {
+  const grid = await utilities.buildAddClassification()
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+
+  const addResult = await invModel.AddNewClassification( classification_name )
+
+  if (addResult) {
+    req.flash(
+      "notice",
+      `The new classification, ${classification_name}, has been added.`
+    )
+    res.status(201).render("inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      grid,
+    })
+  } else {
+    req.flash("notice", "Sorry, the new classification didn't work.")
+    res.status(501).render("inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      grid,
+    })
+  }
+}
+
+invCont.buildNewItem = async function (req, res, next) {
+  const grid = await utilities.buildNewItem( await utilities.buildClassificationList())
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventroy", {
+    title: 'Add New Inventory Item',
+    nav,
+    grid,
+  })
+}
+
+invCont.AddNewItem = async function (req, res, next) {
+  const grid = await utilities.buildNewItem( await utilities.buildClassificationList())
+  let nav = await utilities.getNav()
+ const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
+
+  const addResult = await invModel.AddNewItem( classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color )
+
+  if (addResult) {
+    req.flash(
+      "notice",
+      `The new item has been added.`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Management View",
+      nav,
+      grid,
+    })
+  } else {
+    req.flash("notice", "Sorry, the new item wasn't added.")
+    res.status(501).render("inventory/add-inventroy", {
+      title: "Add Inventory Item",
+      nav,
+      grid,
+    })}
+}
+
 module.exports = invCont
