@@ -182,7 +182,7 @@ Util.buildNewItem = async function(classificationList){
        grid += '<label>Image:</label>'
         grid += '<input name="inv_image" type="text" required value="/images/vechicles/no-image.png">'
         grid += '<label>Thumbnail:</label>'
-        grid += '<input name="inv_thumbnail"  type="text" required value="/images/vechicles/no-image.png">'
+        grid += '<input name="inv_thumbnail"  type="text" required value="/images/vechicles/no-image-tn.png">'
         grid += '<label>Price:</label>'
         grid += '<input name="inv_price" type="text" required value="<%= locals.inv_price %>">'
         grid += '<label>Miles:</label>'

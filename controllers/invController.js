@@ -16,6 +16,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -33,6 +34,7 @@ invCont.buildByInvetoryId = async function (req, res, next) {
     title: idMake + ' ' + idModel,
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -43,6 +45,7 @@ invCont.buildManagement = async function (req, res, next) {
     title: 'Management View',
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -53,6 +56,7 @@ invCont.buildAddClassification = async function (req, res, next) {
     title: 'Add Classification',
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -72,6 +76,7 @@ invCont.AddNewClassification = async function (req, res) {
       title: "Add Classification",
       nav,
       grid,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the new classification didn't work.")
@@ -79,6 +84,7 @@ invCont.AddNewClassification = async function (req, res) {
       title: "Add Classification",
       nav,
       grid,
+      errors: null,
     })
   }
 }
@@ -90,6 +96,7 @@ invCont.buildNewItem = async function (req, res, next) {
     title: 'Add New Inventory Item',
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -109,6 +116,7 @@ invCont.AddNewItem = async function (req, res, next) {
       title: "Management View",
       nav,
       grid,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the new item wasn't added.")
@@ -116,6 +124,7 @@ invCont.AddNewItem = async function (req, res, next) {
       title: "Add Inventory Item",
       nav,
       grid,
+      errors: null,
     })}
 }
 
