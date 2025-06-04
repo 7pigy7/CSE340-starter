@@ -6,9 +6,10 @@ const regValidate = require('../utilities/account-validation')
 const accController = require("../controllers/accController")
 
 // Route to build inventory by classification view
-router.get("/", utilities.checkLogin, utilities.handleErrors(accController.buildManagement))
+router.get("/", utilities.checkLogin, utilities.handleErrors(accController.buildAccount))
 router.get("/login", utilities.handleErrors(accController.buildLogin));
 router.get("/register", utilities.handleErrors(accController.buildRegister));
+
 // Process the registration data
 router.post(
   "/register",
