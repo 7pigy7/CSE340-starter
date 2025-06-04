@@ -1,9 +1,8 @@
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-require("dotenv").config()
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
-
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 
 /* ****************************************
@@ -119,7 +118,7 @@ async function accountLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/account/account")
+      return res.redirect("/account/")
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")

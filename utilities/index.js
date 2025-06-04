@@ -148,12 +148,18 @@ grid += '</form>'
   return grid
 }
 
-Util.buildManagement = async function(){
+Util.buildManagement = async function(classificationList){
   let grid
   grid = '<ul>'
     grid += '<li><a href="/inv/add-classification">Add new classification</a></li>'
     grid += '<li><a href="/inv/add-inventory">Add new inventory</a></li>'
     grid += '</ul>'
+    grid += '<h2>Manage Inventory</h2>'
+    grid += '<p>Select a classification form the list to see the items in that classification.</p>'
+    grid += classificationList
+    gird += '<table id="inventoryDisplay"></table>'
+    grid += '<noscript>JavaScript must be enabled to use this page.</noscript>'
+    grid += '<script src="../../js/inventory.js"></script>' //line might be moved
   return grid
 }
 
