@@ -11,6 +11,7 @@ const env = require("dotenv").config()
 const app = express()
 const session = require("express-session")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 const pool = require('./database/')
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
@@ -34,6 +35,10 @@ const utilities = require ('./utilities/')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+app.use(cookieParser())
+
+app.use(utilities.checkJWTToken)
 
 // Express Messages Middleware
 app.use(require('connect-flash')())

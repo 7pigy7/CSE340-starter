@@ -58,7 +58,7 @@ const utilities = require(".")
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
-  const { account_firstname, account_lastname, account_email } = req.body
+  const { account_firstname, account_lastname, account_email, account_password } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -70,6 +70,7 @@ validate.checkRegData = async (req, res, next) => {
       account_firstname,
       account_lastname,
       account_email,
+      account_password,
     })
     return
   }
@@ -88,16 +89,7 @@ validate.checkRegData = async (req, res, next) => {
       .notEmpty()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required.")
-      .custom(async (account_email) => {
-    const emailExists = await accountModel.checkExistingEmail(account_email)
-    if (emailExists){
-      next()
-    }
-    else{
-      throw new Error("Email does not exists. Please register or use a different email")
-    }
-  }),
+      .withMessage("A valid email is required."),
   
       // password is required and must be strong password
       body("account_password")
@@ -111,15 +103,26 @@ validate.checkRegData = async (req, res, next) => {
           minSymbols: 1,
         })
         .withMessage("Password does not meet requirements.")
-        .custom(async (account_email, account_password) => {
-        const rightPassword = await accountModel.checkPassword(account_email, account_password)
-    if (rightPassword){
-      next()
+      ]
     }
-  else{
-    throw new Error("Password incorrect")
-  }})
-    ]
+
+validate.checkLoginData = async (req, res, next) => {
+  const { account_email, account_password } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/account", {
+      errors,
+      title: "Account",
+      nav,
+      account_email,
+      account_password,
+    })
+    return
   }
+  next()
+}
+
 
 module.exports = validate
