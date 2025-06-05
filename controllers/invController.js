@@ -39,13 +39,11 @@ invCont.buildByInvetoryId = async function (req, res, next) {
 }
 
 invCont.buildManagement = async function (req, res, next) {
-  const grid = await utilities.buildManagement( await utilities.buildClassificationList())
   let nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
     title: 'Management View',
     nav,
-    grid,
     errors: null,
     classificationSelect,
   })

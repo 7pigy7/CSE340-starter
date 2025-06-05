@@ -121,11 +121,7 @@ grid += '</form>'
   return grid
 }
 
-Util.buildAccount = async function(){
-  let grid
-  grid = '<p>You\'re logged in</p>'
-  return grid
-}
+
 
 Util.buildRegister = async function(){
   let grid
