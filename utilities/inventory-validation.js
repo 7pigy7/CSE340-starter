@@ -92,4 +92,23 @@ validate.checkAddData = async (req, res, next) => {
   next()
 }
 
+validate.checkUpdateData = async (req, res, next) => {
+  const classification_name = req.body
+  const inv_id = parseInt(req.params.inv_id)
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit",
+      nav,
+      classification_name,
+      inv_id,
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate

@@ -28,4 +28,11 @@ router.post(
     utilities.handleErrors(invController.AddNewItem)
 );
 
+router.post(
+    "/update/",
+    addValidate.addItemRules(), 
+    addValidate.checkUpdateData, 
+    utilities.handleErrors(invController.updateInventory)
+);
+
 module.exports = router;

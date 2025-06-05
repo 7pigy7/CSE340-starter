@@ -16,7 +16,7 @@
 <% } %>
 
 <!--Display-->
- <form action="/inv/update" method="post">
+ <form action="/inv/update/" method="post">
     <fieldset>
     <label>Classification:</label>
         <%- classificationSelect %>
@@ -40,6 +40,9 @@
         <input name="inv_color" type="text" required value="<%= inv_color %>"> 
         <div class="UpdateItemButton">
         <input type="submit" value="Update Vechicle">
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
         </div>
     </fieldset>
 </form>
