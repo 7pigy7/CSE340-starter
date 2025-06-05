@@ -1,0 +1,45 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!--Message Block-->
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<!--Display-->
+ <form action="/inv/update" method="post">
+    <fieldset>
+    <label>Classification:</label>
+        <%- classificationSelect %>
+     <label>Make:</label>
+        <input name="inv_make" type="text" required value="<%= inv_make %>">
+        <label>Model:</label>
+        <input name="inv_model"  type="text" required value="<%= inv_model %>">
+        <label>Year:</label>
+        <input name="inv_year" type="text" required value="<%= inv_year %>">
+        <label>Description:</label>
+        <textarea name="inv_description" type="text" required ><%= inv_description %> </textarea>
+       <label>Image:</label>
+        <input name="inv_image" type="text" required value="<%= inv_image %>">
+        <label>Thumbnail:</label>
+        <input name="inv_thumbnail"  type="text" required value="<%= inv_thumbnail %>">
+        <label>Price:</label>
+        <input name="inv_price" type="text" required value="<%= inv_price %>">
+        <label>Miles:</label>
+        <input name="inv_miles" type="text" required value="<%= inv_miles %>"> 
+        <label>Color:</label>
+        <input name="inv_color" type="text" required value="<%= inv_color %>"> 
+        <div class="UpdateItemButton">
+        <input type="submit" value="Update Vechicle">
+        </div>
+    </fieldset>
+</form>
