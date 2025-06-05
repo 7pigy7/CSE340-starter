@@ -13,6 +13,7 @@ router.get("/add-classification", utilities.handleErrors(invController.buildAddC
 router.get("/add-inventory", utilities.handleErrors(invController.buildNewItem));
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView));
 
 router.post(
     "/add-classification", 
@@ -33,6 +34,11 @@ router.post(
     addValidate.addItemRules(), 
     addValidate.checkUpdateData, 
     utilities.handleErrors(invController.updateInventory)
+);
+
+router.post(
+    "/delete/",
+    utilities.handleErrors(invController.deleteInventory)
 );
 
 module.exports = router;
