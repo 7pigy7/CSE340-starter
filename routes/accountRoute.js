@@ -7,6 +7,7 @@ const accController = require("../controllers/accController")
 
 // Route to build inventory by classification view
 router.get("/", utilities.checkLogin, utilities.handleErrors(accController.buildAccount))
+router.get("/edit", utilities.handleErrors(accController.editAccount))
 router.get("/login", utilities.handleErrors(accController.buildLogin));
 router.get("/register", utilities.handleErrors(accController.buildRegister));
 

@@ -1,0 +1,38 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!--Message Block-->
+<%- messages() %>
+
+
+
+<!--Edit Account Display-->
+<%# grid %>
+
+<form action="/account/update" name="Update Account Information" method="post">
+    <fieldset>
+      <legend>Edit Your Account Information</legend>
+     <label>Fisrt Name:</label>
+        <input name="account_firstname" type="text" required value="<%= account_firstname %>">
+        <label>Last Name:</label>
+        <input name="account_lastname"  type="text" required value="<%= account_lastname %>">
+        <label>Email:</label>
+        <input name="account_email" type="email"  required value="<%= account_email %>">
+        <input type="submit" value="Update">
+        </fieldset>
+        </form>
+        <form action="/account/change-password" name="Change Your Password" method="post">
+        <fieldset>
+          <legend>Change Your Password</legend>
+        <label>Password:</label>
+        <input name="account_password" type="text" minlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+        <div class="registerButton">
+        <input type="submit" value="Change Password">
+        <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%= locals.account_id %>" <% } %>>
+        </div>
+    </fieldset>
+</form>

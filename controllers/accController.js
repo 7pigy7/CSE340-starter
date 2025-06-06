@@ -135,5 +135,18 @@ async function accountLogin(req, res) {
   }
 }
 
+async function editAccount (req, res, next) {
+  const account_id = parseInt(req.params.account_id) //????
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
+  res.render("./account/account-edit", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,    
+  })
+}
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccount }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccount, editAccount }
