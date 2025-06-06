@@ -1,0 +1,59 @@
+Util.buildAccount = async function(){
+  let data = res.locals.accountData
+  let grid
+  grid = '<h2>Welcome' + data.first_name +'</h2>'
+if (res.locals.loggedin && data.account_type === 'Admin' || data.account_type === 'Employee')
+  grid += '<div id="noClients">'
+  grid += '<h3>Inventory Management</h3>'
+  grid += '<a href="/inv/">Click here</a>'
+  grid += '</div>'
+return grid
+}
+
+
+
+router.get("/", utilities.checkType, utilities.handleErrors(invController.buildManagement));
+
+
+
+Util.checkType = (req, res, next) => {
+  if (res.locals.loggedin && res.locals.accountData.account_type === 'Admin' || res.locals.accountData.account_type === 'Employee') {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+
+Util.getHeader = async function (req, res, next) {
+  let data = res.locals.accountData
+  let list = "<div>"
+  if (data.length > 0){
+    list += '<a href="/account/">Welcome' + data.first_name + '</a>'
+    list += '<a herf="/account/login">Logout</a>'
+  }
+  else() => {
+    list += '<a title="Click to log in" href="/account/login">My Account</a>'}
+ 
+  list += "</div>"
+  return list
+}
+
+
+
+async function buildAccount(req, res, next) {
+  const grid = await utilities.buildAccount()
+  let nav = await utilities.getNav()
+  res.render("account/account", {
+    title: "Account",
+    nav,
+    grid,
+  })
+}
+
+
+Logout delete token/cookie
+
+
+Update Account Information
