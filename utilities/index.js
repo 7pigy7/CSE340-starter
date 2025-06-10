@@ -242,34 +242,6 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
-Util.editAccount = async function(){
-  let grid
- grid = '<form action="/account/update" method="post">'
-    grid += '<fieldset>'
-     grid += '<label>Fisrt Name:</label>'
-        grid += '<input name="account_firstname" type="text" required value="<%= account_firstname %>">'
-        grid += '<label>Last Name:</label>'
-        grid += '<input name="account_lastname"  type="text" required value="<%= account_lastname %>">'
-        grid += '<label>Email:</label>'
-        grid += '<input name="account_email" type="email" placeholder="sample@example.com" required value="<%= account_email %>">'
-        grid += '<input type="submit" value="Update">'
-        grid += '</fieldset>'
-        grid += '</form>'
-        grid += '<form action="/account/change-password" method="post">'
-        grid += '<fieldset>'
-        grid += '<label>Password:</label>'
-        grid += '<input name="account_password" type="text" minlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>'
-        grid += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>' 
-        grid += '<div class="registerButton">'
-        grid += '<input type="submit" value="Change Password">'
-        grid += '<input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%= locals.account_id %>" <% } %>>'
-        grid += '</div>'
-    grid += '</fieldset>'
-grid += '</form>'
-  return grid
-}
-
-
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

@@ -12,6 +12,7 @@
 <%# grid %>
 
 <h2>Welcome <%- accountData.account_firstname%></h2>
+<a href="/account/edit">Edit account information</a>
 <% if (accountData.account_type == 'Admin' || accountData.account_type == 'Employee'){ %>
   <div id="noClients">
   <h3>Inventory Management</h3>

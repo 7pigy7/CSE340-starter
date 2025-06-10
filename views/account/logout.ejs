@@ -1,0 +1,13 @@
+<!--Content Heading-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!--Message Block-->
+<%- messages() %>
+
+
+<!--Login Display-->
+<h1>You have been logged out.</h1>

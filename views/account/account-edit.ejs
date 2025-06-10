@@ -7,7 +7,13 @@
 <!--Message Block-->
 <%- messages() %>
 
-
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <!--Edit Account Display-->
 <%# grid %>
@@ -16,12 +22,13 @@
     <fieldset>
       <legend>Edit Your Account Information</legend>
      <label>Fisrt Name:</label>
-        <input name="account_firstname" type="text" required value="<%= account_firstname %>">
+        <input name="account_firstname" type="text" required value="<%= accountData.account_firstname %>">
         <label>Last Name:</label>
-        <input name="account_lastname"  type="text" required value="<%= account_lastname %>">
+        <input name="account_lastname"  type="text" required value="<%= accountData.account_lastname %>">
         <label>Email:</label>
-        <input name="account_email" type="email"  required value="<%= account_email %>">
+        <input name="account_email" type="email"  required value="<%= accountData.account_email %>">
         <input type="submit" value="Update">
+        <input type="hidden" name="account_id" <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>>
         </fieldset>
         </form>
         <form action="/account/change-password" name="Change Your Password" method="post">
@@ -32,7 +39,7 @@
         <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
         <div class="registerButton">
         <input type="submit" value="Change Password">
-        <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%= locals.account_id %>" <% } %>>
+        <input type="hidden" name="account_id" <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>>
         </div>
     </fieldset>
 </form>
