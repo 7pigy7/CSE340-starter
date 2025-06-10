@@ -8,5 +8,27 @@
 <!--Message Block-->
 <%- messages() %>
 
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <!--Login Display-->
-<%- grid %>
+
+<form name="login" action="/account/login" method="post">
+    <fieldset>
+        <label>Email:</label>
+        <input name="account_email" type="email" placeholder="sample@example.com" required>
+        <label>Password:</label>
+        <input name="account_password" type="password" required>
+        <div class="loginButton">
+        <input type="submit" value="Login">
+        </div>
+        <div class="createAccount">
+            <a href="register">Sign-up Now</a>
+        </div>
+    </fieldset>
+</form>

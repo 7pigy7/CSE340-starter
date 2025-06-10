@@ -23,6 +23,7 @@ async function buildAccount(req, res, next) {
   res.render("account/account", {
     title: "Account",
     nav,
+    accountData: res.locals.accountData,
   })
 }
 
@@ -94,7 +95,6 @@ async function registerAccount(req, res) {
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
-  const grid = await utilities.buildLogin()
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
@@ -104,7 +104,6 @@ async function accountLogin(req, res) {
       title: "Login",
       nav,
       errors: null,
-      grid,
       account_email,
     })
     return
@@ -118,7 +117,7 @@ async function accountLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/account/account")
+      return res.redirect("/")
     }
     else {
       req.flash("message notice", "Please check your credentials and try again.")
