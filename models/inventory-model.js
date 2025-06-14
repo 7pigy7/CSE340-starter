@@ -40,6 +40,28 @@ async function getInventoryByInvId(inv_id) {
   }
 }
 
+async function getInventoryReview(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT account_firstname, account_lastname, rating, review_text
+FROM account a INNER JOIN review r ON a.account_id = r.account_id
+WHERE inv_id = $1`,
+      [inv_id]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getinventoryReview error " + error)
+  }
+}
+
+async function AddReview( rating, review_text, account_id, inv_id){
+  try {
+    const sql = "INSERT INTO review (rating, review_text, account_id, inv_id) VALUES ($1, $2, $3, $4) RETURNING *"
+    return await pool.query(sql, [rating, review_text, account_id, inv_id])
+  } catch (error) {
+    return error.message
+  }
+}
 
 async function AddNewClassification(classification_name){
   try {
@@ -121,4 +143,14 @@ async function updateInventory(
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, checkExistingClassName, AddNewClassification, AddNewItem, updateInventory, deleteInventoryItem };
+module.exports = {getClassifications, 
+                  getInventoryByClassificationId, 
+                  getInventoryByInvId, 
+                  checkExistingClassName, 
+                  AddNewClassification, 
+                  AddNewItem, 
+                  updateInventory, 
+                  deleteInventoryItem ,
+                  getInventoryReview,
+                  AddReview
+                };

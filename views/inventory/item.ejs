@@ -4,7 +4,47 @@
 <% }  %>
 
 <!--Message Block-->
-<%# messages() %>
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <!--Inventory Items Display-->
 <%- grid %>
+<% if (loggedin == 1) { %>
+<form action="/inv/review" name="Review" method="post">
+    <fieldset>
+    <legend>Leave A Review</legend>
+    <lable>First Name:</lable>
+        <input name="account_firstname" type="text" readonly required <% if(locals.accountData.account_firstname) { %> value="<%= locals.accountData.account_firstname %>" <% }  %>>
+    <label>Last Name:</label>
+        <input name="account_lastname"  type="text" readonly required <% if(locals.accountData.account_lastname) { %> value="<%= locals.accountData.account_lastname %>" <% } %>>
+    <label>Email:</label>
+        <input name="account_email" type="email" readonly required <% if(locals.accountData.account_email) { %> value="<%= locals.accountData.account_email %>" <% } %>>
+    <label>Rating</label>
+    <select id="rating" name="rating" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <textarea name="review_text" required placeholder="Leave a deatialed review here"></textarea>
+    <div class="reviewButton">
+        <input type="submit" value="Submit">
+        <input type="hidden" name="account_id" <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>>
+
+        <input type="hidden" name="inv_id" value= " <%= inv_id %> ">
+        </div>
+    </fieldset>
+</form>
+<% } else { %>
+    <p>Please login to leave a review.</p>
+<% } %>
+
+<%- area %>

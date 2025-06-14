@@ -188,6 +188,11 @@ input[type=submit] {
   content: "&#10006;";
 }
 
+#review-display {
+    border: #3a3a3a solid 2px;
+    border-radius: 4px;
+}
+
 @media only screen and (min-width: 32.5em) {
     html {
         background-image: url("../images/site/checkerboard.jpg");

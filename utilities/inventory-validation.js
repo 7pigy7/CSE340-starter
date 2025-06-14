@@ -3,6 +3,20 @@ const utilities = require(".")
   const invModel = require("../models/inventory-model")
   const validate = {}
 
+   validate.addReviewRules = () => {
+    return [
+      body("rating")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 1 })
+        .withMessage("Please provide your rating of this item name."),
+      body("review_text")
+        .trim()
+        .notEmpty()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a deatailed review."),
+    ]}
+
   validate.addClassRules = () => {
     return [
       body("classification_name")
@@ -105,6 +119,27 @@ validate.checkUpdateData = async (req, res, next) => {
       nav,
       classification_name,
       inv_id,
+    })
+    return
+  }
+  next()
+}
+
+validate.checkReviewData = async (req, res, next) => {
+  const rating = req.body
+  const review_text = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/item", {
+      title: idMake + ' ' + idModel,
+      nav,
+      grid,
+      area,
+      errors: null,
+      rating,
+      review_text,
     })
     return
   }

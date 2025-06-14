@@ -25,8 +25,12 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * ************************** */
 invCont.buildByInvetoryId = async function (req, res, next) {
   const inv_id = req.params.inventoryId
+  const accountData = res.locals.accountData
+  const loggedin = res.locals.loggedin
   const data = await invModel.getInventoryByInvId(inv_id)
   const grid = await utilities.buildInventroyGrid(data)
+  const info = await invModel.getInventoryReview(inv_id)
+  const area = await utilities.buildReviewArea(info)
   let nav = await utilities.getNav()
   const idMake = data.inv_make
   const idModel = data.inv_model
@@ -34,8 +38,39 @@ invCont.buildByInvetoryId = async function (req, res, next) {
     title: idMake + ' ' + idModel,
     nav,
     grid,
+    area,
+    inv_id,
+    accountData,
+    loggedin,
     errors: null,
   })
+}
+
+invCont.AddReview = async function (req, res, next) {
+  let nav = await utilities.getNav()
+
+  const {rating, review_text, account_id, inv_id} = req.body
+
+  const addResult = await invModel.AddReview(rating, review_text, account_id, inv_id)
+
+ if (addResult) {
+    req.flash(
+      "notice",
+      `The new review has been added.`
+    )
+    res.status(201).render("./inventory/review", {
+      title: 'Thanks',
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the new review wasn't added.")
+    res.status(501).render("./inventory/review", {
+      title: 'Thanks',
+      nav,
+      errors: null,
+    })
+  }
 }
 
 invCont.buildManagement = async function (req, res, next) {

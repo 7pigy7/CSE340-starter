@@ -16,6 +16,12 @@ router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryVi
 router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView));
 
 router.post(
+    "/review", 
+    addValidate.addReviewRules(), 
+    addValidate.checkReviewData, 
+    utilities.handleErrors(invController.AddReview));
+
+router.post(
     "/add-classification", 
     addValidate.addClassRules(), 
     addValidate.checkAddData, 

@@ -102,6 +102,23 @@ Util.buildInventroyGrid = async function(data){
   return grid
 }
 
+Util.buildReviewArea = async function(data){
+  let area
+  if(data.length > 0){
+    area = '<ul id="review-display">'
+    data.forEach(review => {
+      area +='<h3>' + review.account_firstname + ' '+ review.account_lastname + '</h3>'
+      area += '<p>'+ review.rating + ' stars</p>'
+      area += '<p>' + review.review_text + '</p>'
+      })
+    area += '</ul>'
+    } else { 
+    area += '<p class="notice">Sorry, no reviews could be found.</p>'
+  }
+  return area
+}
+
+
 Util.buildLogin = async function(){
   let grid
  grid = '<form name="login" action="/account/login" method="post">'
